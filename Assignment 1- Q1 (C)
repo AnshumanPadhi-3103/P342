@@ -4,6 +4,12 @@ int main()
     int n;
     printf("Type 'n for adding 1+2+3....+n'");
     scanf("%d", &n);
+    while(n<=0)
+    {
+        printf("Invalid Input! Enter a positive integer!");
+        scanf("%d", &n);
+    }
+    
     int sum=0;
     for(int i=0;i<=n;i++)
     {
