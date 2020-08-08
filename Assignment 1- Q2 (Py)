@@ -1,0 +1,9 @@
+n=int(input("Enter 'n' for n!\n"))
+if n<0:
+    print("Invalid Input! Enter a positive Integer!")
+else:
+    fact=1
+    for i in range(n+1):
+        fact=fact*i
+    print(f'fact = {fact}')
+
