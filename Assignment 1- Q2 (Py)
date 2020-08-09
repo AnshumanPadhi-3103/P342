@@ -1,4 +1,4 @@
-n=int(input("Enter 'n' for 1+2+3......+n\n"))
+n=int(input("Enter 'n' to find n!\n"))
 if n<0:
     print("Invalid Input! Enter a positive Integer!")
 else:
