@@ -5,4 +5,5 @@ while (nextsum- prevsum > 0.001):
      prevsum=nextsum
      nextsum+=1/i
      i+=1
-print(prevsum)
+print("n after which difference in sum is less than 0.001:", i)
+print("sum till n is:",prevsum)
