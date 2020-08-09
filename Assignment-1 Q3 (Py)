@@ -1,1 +1,8 @@
-
+nextsum=1.0
+prevsum=0.0
+i=2
+while (nextsum- prevsum > 0.001):
+     prevsum=nextsum
+     nextsum+=1/i
+     i+=1
+print(prevsum)
