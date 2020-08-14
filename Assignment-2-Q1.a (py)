@@ -1,0 +1,15 @@
+N = int(input("No. of points : "))
+L = []
+for i in range(0,N):
+    L.append(i)
+print(L)
+tot= 0
+for i in range(N):
+   for j in range(i,N):
+      tot+= L[j]-L[i]
+
+obs=0
+for i in range(N):
+   obs+=i
+
+print(tot/obs)
