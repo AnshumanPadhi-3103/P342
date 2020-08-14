@@ -8,7 +8,6 @@ for i in range(n):
 print("Dot Product of vectors A.B is: ",dotproduct)
 
 add = []
-add.append(a[1]+b[1])
-add.append(a[2]+b[2])
-add.append(a[2]+b[2])
+for i in range(n):
+   add.append(a[i]+b[i])
 print("Sum of vectors A+B is:  ",add)
