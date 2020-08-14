@@ -5,11 +5,9 @@ for i in range(0,N):
 print(L)
 tot= 0
 for i in range(N):
-   for j in range(i,N):
-      tot+= L[j]-L[i]
+   for j in range(N):
+      tot+= abs(L[j]-L[i])
+obs= N*N
 
-obs=0
-for i in range(N):
-   obs+=i
 
 print(tot/obs)
