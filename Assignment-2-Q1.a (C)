@@ -1,0 +1,22 @@
+#include<stdio.h>
+
+int main(){
+	
+	int i,j;
+	int N;
+	int obs;
+	int tot=0;
+	double avg;
+	N=6;
+	obs=N*N;
+	
+	for(i=0;i<N;i++){
+		
+		for(j=0;j<N;j++){
+			tot=tot+abs(i-j);
+		}
+	}
+	avg= (double) tot / obs;
+	printf("average distance between the points %lf :",avgdis);
+	
+}
