@@ -17,6 +17,8 @@ int main(){
 		}
 	}
 	avg= (double) tot / obs;
+	printf("Number of pairs possible: %d \n", obs);
+	printf("Total Distance: %d \n", tot);
 	printf("average distance between the points %lf :",avg);
 	
 }
