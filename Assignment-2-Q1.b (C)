@@ -1,0 +1,32 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+int N = 6;
+int GP = N * N;
+int prs = GP * GP;
+int totdist = 0;
+double avgdis;
+for(int i=0; i<N; i++)
+    {
+    for(int j=0; j<N; j++)
+       {
+        int dist = 0;
+        for(int k=0; k<N; k++)
+           {
+            for(int l=0; l<N; l++)
+               {
+                dist = abs(i-k) + abs(j-l);
+                totdist += dist;
+               }    
+           }    
+       }        
+    }
+avgdis = (double) totdist / prs;
+printf("Number of grid points: %d \n ", GP);
+printf("Total number of pairs possible: %d \n", prs);
+printf("Total Distance: %d \n", totdist);
+printf("Average Distance: %lf", avgdis);
+return 0;
+}
