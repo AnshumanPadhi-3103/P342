@@ -1,13 +1,13 @@
 a = [1, 2, 3]
 b = [4, 5, 6]
 n = 3
-dotproduct = 0
-# Loop for calculate dot product
-for i in range(n):
-   dotproduct = dotproduct + a[i] * b[i]
-print("Dot Product of vectors A.B is: ",dotproduct)
 
 add = []
 for i in range(n):
-   add.append(a[i]+b[i])
-print("Sum of vectors A+B is:  ",add)
+    add.append(a[i] + b[i])
+print("Sum of vectors A+B is:  ", add)
+dotproduct = 0
+
+for i in range(n):
+    dotproduct = dotproduct + a[i] * b[i]
+print("Dot Product of vectors A.B is: ", dotproduct)
