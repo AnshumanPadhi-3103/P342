@@ -11,3 +11,11 @@ dotproduct = 0
 for i in range(n):
     dotproduct = dotproduct + a[i] * b[i]
 print("Dot Product of vectors A.B is: ", dotproduct)
+
+
+
+
+
+#OUTPUT
+#Sum of vectors A+B is:   [5, 7, 9]
+#Dot Product of vectors A.B is:  32
