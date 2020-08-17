@@ -1,21 +1,27 @@
-N=6
-GP=N*N
-pts=GP*GP
-totdist=0
+N = 6
+GP = N * N
+pts = GP * GP
+totdis = 0
 
 for i in range(N):
-    for j in range(N): 
-        dist=0;
+    for j in range(N):
+        dist = 0;
         for k in range(N):
-            for l in range(N): 
-                dist=abs(i-k)+abs(j-l)
-                totdis+=dist
-                
-            
-        
-    
-avgdis=totdis/pts
+            for l in range(N):
+                dist = abs(i - k) + abs(j - l)
+                totdis += dist
+
+avgdis = totdis / pts
 print('Number of grid points:', GP)
 print('Total number of pairs possible:', pts)
 print('Total Distance:', totdis)
 print('Average Distance:', avgdis)
+
+
+
+
+#OUTPUT
+#Number of grid points: 36
+#Total number of pairs possible: 1296
+#Total Distance: 5040
+#Average Distance: 3.888888888888889
