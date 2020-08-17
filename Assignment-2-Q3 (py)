@@ -29,3 +29,25 @@ for i in range(3):
            MN[i][j]+=M[i][k]*N[k][j]
 print("Matrix M",  "X", " N : ")
 print('\n'.join([''.join(['{:6}'.format(item) for item in row]) for row in MN]))
+
+
+
+
+
+#OUTPUT
+# Matrix M : 
+#     6     9     1
+#     4     5     7
+#     7     1     3
+# Matrix N : 
+#     9     4     6
+#     5     3     8
+#     7     1     6
+# Matrix M X  A : 
+#    27
+#    35
+#    18
+# Matrix M X  N : 
+#   106    52   114
+#   110    38   106
+#    89    34    68
