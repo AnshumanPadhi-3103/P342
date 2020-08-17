@@ -1,4 +1,4 @@
-N = int(input("No. of points : "))
+N = 6
 L = []
 for i in range(0,N):
     L.append(i)
@@ -8,6 +8,6 @@ for i in range(N):
    for j in range(N):
       tot+= abs(L[j]-L[i])
 obs= N*N
-
-
-print(tot/obs)
+print('Total Distance:', tot)
+print('Total number of pairs:', obs)
+print('Average Distance:', tot/obs)
