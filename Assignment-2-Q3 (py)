@@ -14,22 +14,18 @@ print('\n'.join([''.join(['{:6}'.format(item) for item in row]) for row in N]))
 A=arr.array('i', [1, 2, 3])
 
 
-
-#M cross A
-MA=[0]*3
+MA=[0, 0, 0]
 for i in range(3):
     for j in range(3):
         MA[i]+=M[i][j]*A[j]
-    #
 print("Matrix M", "X" , " A : ")
 print('\n'.join(['{:6}'.format(item) for item in MA]))
 
-#M cross N
+
 MN=[[0 for j in range(3)] for i in range(3)]
 for i in range(3):
     for j in range(3):
         for k in range(3):
            MN[i][j]+=M[i][k]*N[k][j]
-
 print("Matrix M",  "X", " N : ")
 print('\n'.join([''.join(['{:6}'.format(item) for item in row]) for row in MN]))
