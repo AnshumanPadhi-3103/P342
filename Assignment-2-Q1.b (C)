@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdio.h>
 #include <stdlib.h>
 
 int main()
@@ -30,3 +31,12 @@ printf("Total Distance: %d \n", totdist);
 printf("Average Distance: %lf", avgdis);
 return 0;
 }
+
+
+
+/*
+Number of grid points: 36
+ Total number of pairs possible: 1296
+Total Distance: 5040
+Average Distance: 3.888889
+*/
