@@ -11,3 +11,12 @@ obs= N*N
 print('Total Distance:', tot)
 print('Total number of pairs:', obs)
 print('Average Distance:', tot/obs)
+
+
+
+
+
+#OUTPUT
+#Total Distance: 70
+#Total number of pairs: 36
+#Average Distance: 1.9444444444444444
