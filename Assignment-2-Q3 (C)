@@ -1,5 +1,6 @@
 
 
+
 #include <stdio.h>
 
 int main()
@@ -7,47 +8,68 @@ int main()
     int M[3][3];
     int N[3][3];
     
-    FILE *tmp1=fopen("M.txt","r");
-    if(tmp1==NULL){
+    FILE *C=fopen("M.txt","r");
+    if(C==NULL){
         printf("ERRor:404, file not found!");
     }
     else{
-        fscanf(tmp1,"%d,%d,%d \n,%d,%d,%d \n,%d,%d,%d \n",&M[0][0],&M[0][1],&M[0][2],&M[1][0],&M[1][1],&M[1][2],&M[2][0],&M[2][1],&M[2][2]);
+        fscanf(C,"%d,%d,%d \n,%d,%d,%d \n,%d,%d,%d \n",&M[0][0],&M[0][1],&M[0][2],&M[1][0],&M[1][1],&M[1][2],&M[2][0],&M[2][1],&M[2][2]);
     }
     
-    FILE *tmp2=fopen("N.txt","r");
-    if(tmp2==NULL){
+    FILE *D=fopen("N.txt","r");
+    if(D==NULL){
         printf("ERRor:404, file not found!");
     }
     
     else{
-        fscanf(tmp2,"%d,%d,%d \n,%d,%d,%d \n,%d,%d,%d \n",&N[0][0],&N[0][1],&N[0][2],&N[1][0],&N[1][1],&N[1][2],&N[2][0],&N[2][1],&N[2][2]);
+        fscanf(D,"%d,%d,%d \n,%d,%d,%d \n,%d,%d,%d \n",&N[0][0],&N[0][1],&N[0][2],&N[1][0],&N[1][1],&N[1][2],&N[2][0],&N[2][1],&N[2][2]);
     }
     
     int A[]={1,2,3};
-    int MA[3]={0,0,0};
+    int MA[3];
     int MN[3][3];
     
-    
+    int res=0;
     
     for(int i=0;i<3;i++){
         for(int j=0;j<3;j++){
-            MA[i]+=M[i][j]*A[j];
+            res+=M[i][j]*A[j];
         }
-        
+        MA[i]=res;
+        res=0;
     }
     
     for(int i=0;i<3;i++){
         for(int j=0;j<3;j++){
             for(int k=0;k<3;k++){
-                MN[i][j]+=M[i][k]*N[k][j];
+                res+=M[i][k]*N[k][j];
             }
-            
+            MN[i][j]=res;
+            res=0;
         }
     }
     
-    
-   printf("MA: \n");
+    printf("M: \n");
+    for(int i=0; i<3; i++) {
+      for(int j=0;j<3;j++) {
+         printf("%d ", M[i][j]);
+         if(j==2){
+            printf("\n");
+         }
+      }
+   }
+   
+   printf("N: \n");
+   for(int i=0; i<3; i++) {
+      for(int j=0;j<3;j++) {
+         printf("%d ", N[i][j]);
+         if(j==2){
+            printf("\n");
+         }
+      }
+   }
+   
+   printf("M X A: \n");
    for(int i=0; i<3; i++) {
       printf("%d ", MA[i]);
          if(i==2){
@@ -55,7 +77,7 @@ int main()
          }
    }
    
-   printf("MN: \n");
+   printf("M X N: \n");
    for(int i=0; i<3; i++) {
       for(int j=0;j<3;j++) {
          printf("%d ", MN[i][j]);
@@ -69,3 +91,24 @@ int main()
 
     return 0;
 }
+
+/*
+M: 
+6 9 1 
+4 5 7 
+7 1 3 
+
+N: 
+9 4 6 
+5 3 8 
+7 1 6 
+
+M X A: 
+27 35 18 
+
+M X N: 
+106 52 114 
+110 38 106 
+89 34 68 
+
+*/
