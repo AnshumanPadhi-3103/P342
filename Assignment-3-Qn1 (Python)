@@ -10,7 +10,7 @@ print('\n'.join([''.join(['{:6}'.format(item) for item in row]) for row in AugM]
 
 def PartialPivot(AugM):
 
-    for r in range(n):
+    for r in range(n-1):
         if AugM[r][r] == 0:
             for i in range(r + 1, n):
                 if abs(AugM[i][r]) > AugM[r][r]:
