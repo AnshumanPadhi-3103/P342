@@ -1,0 +1,103 @@
+#Question 3
+n=3
+
+def PartialPivot(AugM):
+
+    for r in range(n-1):
+        if AugM[r][r] == 0:
+            for i in range(r + 1, n):
+                if abs(AugM[i][r]) > AugM[r][r]:
+                    for c in range(r, 2*n):
+                        AugM[r][c], AugM[i][c] = AugM[i][c], AugM[r][c]
+                        continue
+
+def GaussJordan(AugM):
+
+    for r in range(n):
+        PartialPivot(AugM)
+        piv = AugM[r][r]
+        for c in range(r, 2*n):
+            AugM[r][c] /= piv
+
+        # for making the rest of the column except the pivot = 0
+        for i in range(n):
+            if i == r or AugM[i][r] == 0:
+                continue
+            else:
+                factor = AugM[i][r]
+                for c in range(r, 2*n):
+                    AugM[i][c] -= factor * AugM[r][c]
+    return AugM
+
+
+def multiply(M,X,MX):
+    for r in range(n):
+        for c in range(n):
+            for i in range(n):
+                MX[r][c]+= M[r][i]*X[i][c]
+    return M,X,MX
+
+C = open('Q3-Matrix.txt', 'r')
+M = [[int(num) for num in line.split(',')] for line in C]
+print("The Matrix : ")
+print('\n'.join([''.join(['{:6}'.format(item) for item in row]) for row in M]))
+
+
+AugM=[[0 for j in range(2*n)] for i in range(n)]
+for i in range(n):
+    for j in range(2*n):
+        if j<3: AugM[i][j]=M[i][j]
+        else:
+            k=j-3
+            if k==i: AugM[i][j]=1
+print("The augmented matrix:")
+print('\n'.join([''.join(['{:6}'.format(item) for item in row]) for row in AugM]))
+
+
+T = GaussJordan(AugM)
+print("The Gauss-Jordan solution of the augmented matrix:")
+print('\n'.join([''.join(['{:6}'.format(item) for item in row]) for row in T]))
+
+
+
+#taking out the inverse from augmented matrix
+X=[[0 for j in range(n)]for i in range(n)]
+for i in range(n):
+    for j in range(2*n):
+        if j>n-1:
+            k=j-n
+            X[i][k]=AugM[i][j]
+print("The Inverse obtained from the augmented matrix:")
+print('\n'.join([''.join(['{:6}'.format(item) for item in row]) for row in X]))
+
+print("Matrix multiplied with its inverse:")
+MX=[[0 for j in range(n)]for i in range(n)]
+P,Q,R= multiply(M,X,MX)
+print('\n'.join([''.join(['{:6}'.format(item) for item in row]) for row in R]))
+
+
+
+#C:\Users\Anshuman\PycharmProjects\pythonProject1\venv\Scripts\python.exe C:/Users/Anshuman/PycharmProjects/pythonProject1/main.py
+#The Matrix : 
+#     1    -3     7
+#    -1     4    -7
+#    -1     3    -6
+#The augmented matrix:
+#     1    -3     7     1     0     0
+#    -1     4    -7     0     1     0
+#    -1     3    -6     0     0     1
+#The Gauss-Jordan solution of the augmented matrix:
+#   1.0   0.0   0.0  -3.0   3.0  -7.0
+#   0.0   1.0   0.0   1.0   1.0   0.0
+#   0.0   0.0   1.0   1.0   0.0   1.0
+#The Inverse obtained from the augmented matrix:
+#  -3.0   3.0  -7.0
+#   1.0   1.0   0.0
+#   1.0   0.0   1.0
+#Matrix multiplied with its inverse:
+#   1.0   0.0   0.0
+#   0.0   1.0   0.0
+#   0.0   0.0   1.0
+
+#Process finished with exit code 0
+
