@@ -1,0 +1,76 @@
+#Question 1
+
+n=3
+C = open('Q1-AugM.txt', 'r')
+AugM = [[int(num) for num in line.split(',')] for line in C]
+print("The Augmented Matrix : ")
+print('\n'.join([''.join(['{:6}'.format(item) for item in row]) for row in AugM]))
+
+
+
+def PartialPivot(AugM):
+
+    for r in range(n):
+        if AugM[r][r] == 0:
+            for i in range(r + 1, n):
+                if abs(AugM[i][r]) > AugM[r][r]:
+                    for c in range(r, n+1):
+                        AugM[r][c], AugM[i][c] = AugM[i][c], AugM[r][c]
+                        continue
+
+
+
+def GaussJordan(AugM):
+
+    for r in range(n):
+        PartialPivot(AugM)
+        piv = AugM[r][r]
+        for c in range(r, n+1):
+            AugM[r][c] /= piv
+
+
+        # for making the rest of the column except the pivot = 0
+        for i in range(n):
+            if i == r or AugM[i][r] == 0:
+                continue
+            else:
+                factor = AugM[i][r]
+                for c in range(r, n+1):
+                    AugM[i][c] -= factor * AugM[r][c]
+
+    return AugM
+
+
+T = GaussJordan(AugM)
+print("The augmented matrix after Gauss-Jordan elimination:")
+print('\n'.join([''.join(['{:6}'.format(item) for item in row]) for row in T]))
+
+X=[]
+for i in range(n):
+    X.append(T[i][n])
+print("Hence The solution obtained from the augmented Matrix is:")
+print(X)
+
+
+
+
+
+
+
+
+
+
+#C:\Users\Anshuman\PycharmProjects\pythonProject1\venv\Scripts\python.exe C:/Users/Anshuman/PycharmProjects/pythonProject1/main.py
+#The Augmented Matrix :
+#     1     3     2     2
+#     2     7     7    -1
+#     2     5     2     7
+#The augmented matrix after Gauss-Jordan elimination:
+#   1.0   0.0   0.0   3.0
+#   0.0   1.0   0.0   1.0
+#   0.0   0.0   1.0  -2.0
+#Hence The solution obtained from the augmented Matrix is:
+#[3.0, 1.0, -2.0]
+
+#Process finished with exit code 0
+#
