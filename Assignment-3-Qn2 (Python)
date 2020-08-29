@@ -42,7 +42,7 @@ def GaussJordan(AugM):
 
 
 T = GaussJordan(AugM)
-print("The solution of the augmented matrix:")
+print("The augmented matrix after Gauss-Jordan elimination:")
 print('\n'.join([''.join(['{:6}'.format(item) for item in row]) for row in T]))
 
 X=[]
@@ -58,7 +58,7 @@ print(X)
 #     0     2     5     1
 #     3    -1     2    -2
 #     1    -1     3     3
-#The solution of the augmented matrix:
+#The augmented matrix after Gauss-Jordan elimination:
 #   1.0   0.0   0.0  -2.0
 #     0   1.0   0.0  -2.0
 #   0.0   0.0   1.0   1.0
