@@ -21,7 +21,7 @@ def PartialPivot(AugM):
 
 
 def GaussJordan(AugM):
-
+    # for making the pivots= 1
     for r in range(n):
         PartialPivot(AugM)
         piv = AugM[r][r]
