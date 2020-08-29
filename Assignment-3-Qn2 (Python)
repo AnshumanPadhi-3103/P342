@@ -13,10 +13,11 @@ def PartialPivot(AugM):
     for r in range(n-1):
         if AugM[r][r] == 0:
             for i in range(r + 1, n):
-                if abs(AugM[i][r]) > AugM[r][r]:
+                if AugM[i][r] != AugM[r][r]:
                     for c in range(r, n+1):
                         AugM[r][c], AugM[i][c] = AugM[i][c], AugM[r][c]
                         continue
+
 
 
 
