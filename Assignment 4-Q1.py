@@ -22,13 +22,7 @@ def lu_decomposition(A, n):
                 s2 += U[k][j] * L[i][k]  # k_sum
             L[i][j] = (A[i][j] - s2) / U[j][j]  # Defining terms of the L matrix
             A[i][j] = L[i][j]  # Storing terms of L in the original
-    # printing the results
-    print('L Matrix after LU Decomposition:')
-    print_arrays(L)
-    print('U Matrix after LU Decomposition:')
-    print_arrays(L)
-    print('Storing L and U in A itself:')
-    print_arrays(L)
+
     return (L, U, A)
 
 def forward_backward(a, b, n):
@@ -54,6 +48,13 @@ G = open('B.txt','r') #calling the txt file for RHS vector
 M= [int(num) for num in G] #arranging it in form of an array
 
 L,U,A=lu_decomposition(D,4) #Decomposing the called LHS matrix
+# printing the results
+print('L Matrix after LU Decomposition:')
+print_arrays(L)
+print('U Matrix after LU Decomposition:')
+print_arrays(L)
+print('Storing L and U in A itself:')
+print_arrays(L)
 X=forward_backward(A,M,4) #Running forward Backward substitution
 print('The solution obtained after forward-backward substitution:')
 print(X) #result
