@@ -160,44 +160,6 @@ def check_inverse_exists(A):
 
     return det
 
-def check_inverse_exists_and_calculate(A):  # function to check if inverse exists, and if so, calculate it
-    n = len(A)
-    det = 1
-    for i in range(n):
-        det = det * A[i][i]  # multiplying the diagonal elements
-    if det == 0:  # since for a inverse to exist, det!=0
-        print('Inverse Does not exist!')
-    else:
-        print('Inverse exists!')
-        print('The Determinant value:', det)
-        Inverse_calculate(A, n)  # fucntion to calculate matrix
-    return Inverse_calculate(A, n)
-
-def Inverse_calculate(Piv_AugM, n):
-    # Creating Blank Matrices and vectors
-    A = [[0 for j in range(n)] for i in range(n)]
-    inverse_A = [[0 for j in range(n)] for i in range(n)]
-    B = [0 for i in range(n)]
-
-    # extracting A from the augmented matrix
-    for j in range(n):
-        for i in range(n):
-            A[i][j] = Piv_AugM[i][j]
-
-    L, U, C = lu_decomposition(A, 4)  # LU decomposition on A
-    for i in range(n):  # extracting the columns of pivoted identity matrix
-        for j in range(n):
-            B[j] = Piv_AugM[j][i + n]
-            forward_backward(C, B, n)  # performing forward-backward substitution
-        for j in range(n):
-            inverse_A[j][i] = B[j] #storing the solution columnwise
-    print('The inverse of A:')
-    print_arrays(inverse_A)
-    return inverse_A
-
-
-
-
 
 
 
