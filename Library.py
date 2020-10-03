@@ -160,9 +160,131 @@ def check_inverse_exists(A):
 
     return det
 
+def f_prime(f, x ): #function to find the 1st derivative of a function
+    h = 0.0001
+    return (f(x + h) - f(x - h)) / (2 * h)
+def f_double_prime(f, x): #function to find the 1st derivative of a function
+    h = 0.0001
+    return (f(x + h) + f(x - h) - 2 * f(x)) / (h ** 2)
+
+def Bracketing(f,a,b): #providing guesses for the interval and bracketing the root
+    product= f(a)*f(b)
+    if product<0: #if the product is negative it implies the solution lies between a and b
+        print("Root already exists in the guessed interval")
+        return a,b
+    else:
+        i = 0
+        while product>0: #if the product is positive hence both f(a) and f(b) lie on the same side
+            if abs(f(a))<abs(f(b)): #means solution is to the left
+                a=a- 1.5*(b-a) #Defining a new 'a' to its left
+                product = f(a) * f(b)
+                i=i+ 1
+            else:
+                b = b + 1.5 * (b - a) #means solution is to the right
+                product = f(a) * f(b) #Defining a new 'b' to its right
+                i=i+ 1
+        print("The solution exists in the interval:",a,b)
+        return a,b
+
+def Regular_falsi(f,a,b,tol,max_itr):
+    #defining all blank lists for future storage
+    Iterartion=[]
+    Root_val=[]
+    error=[]
+    c=a #initiating a guess at one of the end points of the bracket
+    for i in range(max_itr):
+        prev_c=c #storing the previous value
+        c = b- (((b - a)*f(b))/(f(b)-f(a)))
+        if abs(b-a)<tol: #if a and b are too close to the solution
+            continue
+        if f(a)*f(c)>0:
+            a=c
+        else:
+            b=c
+        if abs(c - prev_c) > tol: #the difference between c and the previous c is the absolute error in this iteration
+            #storing no, of iterations, root and absolute error at each iteration in respective lists
+            Iterartion.append(i)
+            Root_val.append(c)
+            e=abs(Root_val[i]-Root_val[i-1])
+            error.append(e)
+        else: #if the error converges and no significant error is noticed
+            return c,Iterartion,Root_val, error
 
 
 
+def Bisection(f,a,b,tol,max_itr):
+    # defining all blank lists for future storage
+    Iterartion=[]
+    Root_val=[]
+    for i in range(max_itr):
+        c = (a+b)/2
+        if abs(b - a) < tol: #if a and b are too close to the solution
+            continue
+        if f(a) * f(c) > 0:
+            a = c
+        else:
+            b = c
+        # storing no, of iterations, root and absolute error at each iteration in respective lists
+        Iterartion.append(i)
+        Root_val.append(c)
 
 
+    return c,Iterartion,Root_val
 
+def abs_error(Val): #fucntion to find the absolute error in each iteration
+    error=[]
+    for i in range(len(Val)-1):
+        q= abs(Val[i+1]-Val[i]) # |c_{i+1}-c_{i}|
+        error.append(q)
+    return error
+
+def laguerre(b, A, poly_f, tol): #function to find out a root
+    n = len(A) #finding the number of coefficients or the length of input array
+    for i in range(20):
+        if abs(poly_f(b)) < tol:
+            continue
+        else:
+            G = f_prime(poly_f, b) / poly_f(b) #defining G= f'(b)/f(b)
+            P = f_double_prime(poly_f, b) / poly_f(b) #defining P= f''(b)/f(b)
+            H = G ** 2 - P
+            #statement used to maximise the denominator of a = n / (G +/- ((n - 1) * (n * H - G**2)) ** 0.5)
+            if G > tol:
+                a = n / (G + ((n - 1) * (n * H - G**2)) ** 0.5)
+            else:
+                a = n / (G - ((n - 1) * (n * H - G**2)) ** 0.5)
+            if abs(G) < tol:
+                a = n / (((n - 1) * (n * H - G**2)) ** 0.5)
+            b = b - a
+
+            while abs(b - a) < tol:
+                if G >= 0:
+                    a = n / (G + ((n - 1) * (n * H - G**2)) ** 0.5)
+                else:
+                    a = n / (G - ((n - 1) * (n * H - G**2)) ** 0.5)
+                b = b - a
+
+    return b
+
+
+def syn_div(a, b): #function to divide a polynomial by a root
+    n = len(a) #finding the number of coefficients or the length of input array
+    p = [0 for i in range(n)]
+    p[0] = a[0] #keeping the highest order coefficient constant
+    for i in range(1, n):
+        p[i] = a[i] - b * p[i - 1] #performing synthetic divsion
+    return p
+
+def Newton_Raphson(f,b,tol,max_itr):
+    # defining all blank lists for future storage
+    Iterartion = []
+    Root_val = []
+    for i in range(max_itr):
+        c = b - (f(b)/f_prime(f,b))
+
+        if abs(b-c)>tol:
+            b = c
+            # storing no, of iterations, root and absolute error at each iteration in respective lists
+            Iterartion.append(i)
+            Root_val.append(c)
+        else:
+            return c,Iterartion,Root_val
