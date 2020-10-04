@@ -22,6 +22,11 @@ print("Roots of the polynomial obtained after rounding them off:",round(b),round
 
 
 
+#C:\Users\Anshuman\PycharmProjects\pythonProject1\venv\Scripts\python.exe C:/Users/Anshuman/PycharmProjects/pythonProject1/main.py
+#Roots of the polynomial obtained: 3.0000000000000986 2.0000000000019322 0.999999813825891 -2.9999998138442354
+#Roots of the polynomial obtained after rounding them off: 3 2 1 -3
+
+#Process finished with exit code 0
 
 
 
