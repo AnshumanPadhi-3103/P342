@@ -1,4 +1,3 @@
-
 def PartialPivot(AugM,n,m):
 
     for r in range(n-1): #running loop till 2nd last column
@@ -237,35 +236,6 @@ def abs_error(Val): #fucntion to find the absolute error in each iteration
         q= abs(Val[i+1]-Val[i]) # |c_{i+1}-c_{i}|
         error.append(q)
     return error
-
-def laguerre(b, A, poly_f, tol): #function to find out a root
-    n = len(A) #finding the number of coefficients or the length of input array
-    for i in range(20):
-        if abs(poly_f(b)) < tol:
-            continue
-        else:
-            G = f_prime(poly_f, b) / poly_f(b) #defining G= f'(b)/f(b)
-            P = f_double_prime(poly_f, b) / poly_f(b) #defining P= f''(b)/f(b)
-            H = G ** 2 - P
-            #statement used to maximise the denominator of a = n / (G +/- ((n - 1) * (n * H - G**2)) ** 0.5)
-            if G > tol:
-                a = n / (G + ((n - 1) * (n * H - G**2)) ** 0.5)
-            elif G< -1*tol:
-                a = n / (G - ((n - 1) * (n * H - G**2)) ** 0.5)
-            else:
-                a = n / (((n - 1) * (n * H - G**2)) ** 0.5)
-            b = b - a
-    return b
-
-
-def syn_div(a, b): #function to divide a polynomial by a root
-    n = len(a) #finding the number of coefficients or the length of input array
-    p = [0 for i in range(n)]
-    p[0] = a[0] #keeping the highest order coefficient constant
-    for i in range(1, n):
-        p[i] = a[i] - b * p[i - 1] #performing synthetic divsion
-    return p
-
 def Newton_Raphson(f,b,tol,max_itr):
     # defining all blank lists for future storage
     Iterartion = []
@@ -280,3 +250,51 @@ def Newton_Raphson(f,b,tol,max_itr):
             Root_val.append(c)
         else:
             return c,Iterartion,Root_val
+
+
+def poly_f(A, x): #fucntion for intaking coefficients of the terms of higher order to lower order and writing a polynomial
+    n = len(A)
+    sum = 0
+    for i in range(n):
+        sum = sum + A[i] * x**(n-1-i) #since n-1 would be the order of polynomial
+    return sum
+
+def poly_prime(A, x ): #fucntion to find the prime of a polynomial
+    h=0.0001
+    return (poly_f(A, x+h) - poly_f(A, x-h))/(2*h)
+
+def poly_double_prime(A, x): #fucntion to find the double prime of a polynomial
+    h = 0.0001
+    return (poly_f(A, x+h) + poly_f(A, x-h) - 2 * poly_f(A, x)) / (h ** 2)
+
+def laguerre(A, b, tol): #fucntion for laguerre's method of finding root, intakes coefficients (higher-lower) and a guess value
+    for i in range(200):
+        if abs(poly_f(A, b)) < tol: #guessed value is the solution
+            return b
+        else:
+            G = poly_prime(A, b)/(poly_f(A, b)) #defining G= f'(b)/f(b)
+            K= (poly_double_prime(A, b)/poly_f(A, b)) #defining P= f''(b)/f(b)
+            H = G**2 - K
+            n = len(A) - 1 #order of polynomial
+            # statement used to maximise the denominator of a = n / (G +/- ((n - 1) * (n * H - G**2)) ** 0.5)
+            if G>=0:
+                a = n/(G + ((n-1)*(n*H - G**2))**0.5)
+            else:
+                a = n/(G - ((n-1)*(n*H - G**2))**0.5)
+            b0=b
+            b = b - a
+            if abs(b - b0) < tol: #stopping iteration if 'b' converges
+                return b0
+
+
+def syn_div(A, b,tol): #dividing a polynomial with coefficient list A with x-b
+    n=len(A)
+    q = [] #creating blank list for future storage of the reduced polynomial
+    q.append(A[0])
+    for i in range(1, n):
+        q.append(b*q[i-1] + A[i])
+    if q[n-1]>tol: #checking if the remainder value is ignorable or not
+        print("Polynomial not divisible ",q[n])
+    else: q.pop() #if not, excluding it from the list
+    return q
+
